@@ -693,8 +693,8 @@ def missed_peaks(obs: DataArray,
         # skip peaks at the start and end of the sequence and peaks around missing observations
         # (NaNs that were removed in obs & sim would result in windows that span too much time).
         if (idx - window < 0) or (idx + window >= len(obs)) or (pd.date_range(obs[idx - window][datetime_coord].values,
-                                                                              obs[idx + window][datetime_coord].values,
-                                                                              freq=resolution).size != 2 * window + 1):
+        obs[idx + window][datetime_coord].values,
+        freq=resolution).size != 2 * window + 1):
             continue
 
         nearby_peak_sim_index = np.where(np.abs(peaks_sim_times - idx) <= window)[0]
